@@ -4,13 +4,16 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.a611.foodondemand.R;
 import com.a611.foodondemand.adapter.BaseFragmentPagerAdapter;
+import com.a611.foodondemand.fragment.NavigationFragment;
 import com.a611.foodondemand.fragment.OneFragment;
 import com.a611.foodondemand.utils.CommonUtil;
 
@@ -18,7 +21,7 @@ import com.a611.foodondemand.utils.CommonUtil;
  * Created by pnhung on 2/12/2017.
  */
 
-public class MainActivity extends BaseAppCompatActivity {
+public class MainActivity extends BaseAppCompatActivity implements NavigationFragment.FragmentDrawerListener{
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
@@ -27,6 +30,10 @@ public class MainActivity extends BaseAppCompatActivity {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        naviFragment = (NavigationFragment)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        naviFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), toolbar);
+        naviFragment.setDrawerListener(this);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
     }
@@ -88,6 +95,23 @@ public class MainActivity extends BaseAppCompatActivity {
     class ViewPagerAdapter extends BaseFragmentPagerAdapter {
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
+        }
+    }
+
+
+    @Override
+    public void onDrawerItemSelected(View view, int position) {
+        switch (position)
+        {
+            case 0:
+                Toast.makeText(this, "HomeNavigation", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(this, "MessagesNavigation", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(this, "FriendNavigation", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 }

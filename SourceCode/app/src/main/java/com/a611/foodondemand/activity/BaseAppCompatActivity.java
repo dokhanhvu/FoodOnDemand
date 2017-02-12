@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.a611.foodondemand.fragment.NavigationFragment;
+
 /**
  * Created by pnhung on 2/11/2017.
  */
@@ -11,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 public abstract class BaseAppCompatActivity extends AppCompatActivity {
 
     protected Toolbar toolbar;
+    protected NavigationFragment naviFragment;
 
     protected abstract int getContainerId();
     protected  abstract void findViewById();
