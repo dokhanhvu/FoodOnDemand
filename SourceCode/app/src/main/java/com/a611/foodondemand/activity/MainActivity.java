@@ -5,6 +5,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.a611.foodondemand.R;
 import com.a611.foodondemand.adapter.BaseFragmentPagerAdapter;
@@ -53,9 +56,33 @@ public class MainActivity extends BaseAppCompatActivity {
     }
 
     @Override
-    protected void changeTitleActivity(Toolbar toolbar)
-    {
+    protected void changeTitleActivity(Toolbar toolbar) {
         super.changeTitleActivity(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_settings:
+                Toast.makeText(this, "settings", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.action_search:
+                Toast.makeText(this, "search", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     class ViewPagerAdapter extends BaseFragmentPagerAdapter {
